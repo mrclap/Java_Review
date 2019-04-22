@@ -12,8 +12,8 @@ Java기초, 제대로 다시 쌓기!
 
 - - -
 ### Ch01. 자바를 시작하기 전에
-#### about Java
-##### 자바의 특징
+#### 1. about Java
+##### 1.1 자바의 특징
 - OS independent <code>("Write once. run anywhere")</code>
 - 객체지향
 - 배우기 쉽다 
@@ -28,7 +28,7 @@ Java기초, 제대로 다시 쌓기!
   - 필요한 시점에 클래스를 로딩, 변경된 일부 클래스만 다시 컴파일
   
   
-##### 자바로 프로그램 작성 기초
+##### 1.2 자바로 프로그램 작성 기초
 - 자바애플리케이션에는 main메서드를 포함하는 클래스가 반드시 하나있어야 한다.
   - <code>Exception in thread "main" java.lang.NoSuchMethodError: main</code>
 - 소스파일의 이름은 <code>public class</code>의 이름과 일치해야 한다.
@@ -106,6 +106,47 @@ System.out.println("가나다/t123/bABC") // 가나다  12ABC
 ```
 
 
+```
+뭐지..? 왜 집에서한게 push가 안되어 있지 ?!
+쨋든... chatper 4
+```
+
+~~loop에 label을 붙여 continue, break에 사용할 수 있지만 쓰지말자~~
+
+
+- - -
+### Ch05. 배열(Array)
+#### 1. 배열
+##### 배열이란
+배열은 각 저장공간이 연속적으로 배치된다
+ - _정말 100% 그런것인가_..?
  
+##### 배열의 선언/생성
+선언은 타입명 뒤 혹은 변수 이름 뒤
+```java
+int[] numbers;
+int numbers[];
+```
+
+길이가 0인 배열이 필요할 때가 있다?
+- <code>int[] arr = new int[0];</code>
+- todo) 있다고하는데 나중에 다시 살펴보자.
 
 
+##### 배열초기화
+
+배열에 저장할 값을 {}를 이용하여 초기화
+- new int[]를 생략할 수 있음
+```java
+int[] numbers = new int[]{ 1, 2, 3, 4, 5};
+int[] numbers = {1, 2, 3, 4, 5};
+단, 배열의 선언과 생성이 따로인 경우 생략할 수 없음.
+```
+
+길이가 0인 배열
+
+```java
+int[] number = new int[0];
+int[] number = new int[]{};
+int[] number = {};
+```
