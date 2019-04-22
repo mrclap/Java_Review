@@ -62,22 +62,50 @@ Java기초, 제대로 다시 쌓기!
 - 참조형 변수는 (4byte 혹은 8byte 크기의 주소) or null을 값으로 갖는다.
    
 ##### Using <code>short</code> data type on 32-bit CPU
-- 메모리의 사용은 줄일 수 있으나, cpu에서 32bit식 연산하므로 연산 후 다시 short size(1byte)로 데이터를 잘라내는 작업이 수행 됨
+- ~~메모리의 사용은 줄일 수 있으나, cpu에서 32bit식 연산하므로 연산 후 다시 short size(1byte)로 데이터를 잘라내는 작업이 수행 됨~~
+  - <code>조금 더 공부해봐야 할 듯. JVM operand stack 등 개념과도 연관이 있을지 모름</code>
 - 64bit cpu에서 int를 사용하는 것은 왜 괜찮은가???
-  - 32bit cpu로 동작해서?>?????? 
+  - ~~32bit cpu로 동작해서?>??????~~
   
 ```
 리터럴 부분 집에서 한 것 추가하기
 ```
 
 
-실수형 리터럴 표현
+실수
+
 - **실수형 리터럴은 기본이 double이므로 float 변수 사용시 접미사 f가반드시 필요!**
 - float 10f  / float 10.0f
 - float 3.14e3f / float 3140.0f
+- overflow 발생 -> infinity
+- underflow -> 너무 작은 값을 표현하려고 할 때( 0이 되어 버림) 
+  - ex) float타입의 -1.4x10e-45 ~ 1.4x10e-45 범위
+- <code> int type : 부호 + 값
+ float type : 부호 + 지수 + 가수</code>
+ 이므로 실수 타입은 더 큰 절대값을 표현할 수 있으나 정밀도가 떨어진다.
 
-문자형 리터럴 표현
+
+
+문자형 
 ```java
-char ch = '';
+char타입의 경우 반드시 문자가 들어가야 함.
+    char ch = ''; // error!
+    char ch2 = ' '; // available!
+
+String은 클래스이므로 연산자 new를 이용해야 하지만
+    String str = new String("string")
+    String str2 = "string"
+의 표현 허용
+
 ```
+
+특수문자 다루기
+```java
+/b : backspace로 지우는 것이 가능.
+System.out.println("가나다/t123/bABC") // 가나다  12ABC 
+```
+
+
+ 
+
 
