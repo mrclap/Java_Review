@@ -210,3 +210,24 @@ Method Area / Call stack / Heap 으로 구성
 
 재귀호출은 반복문보다 수행시간이 더 오래 걸린다
 - 매개변수 복사, 실행 후 복귀 주소 저장 등의 이유
+
+##### 3.11 클래스 메서드(static)
+
+멤버변수 : 클래스 영역에 선언된 변수
+- 인스턴트 변수 : 인스턴스 생성시 생성
+- 클래스 변수 : 인스턴스 생성여부와 관계없이 생성
+
+### 4. 오버로딩(overloading)
+##### 4.5 가변인자(varargs)와 오버로딩
+
+가변인자를 이용해 연속되는 파라미터를 하나로 묶어 줄 수 있다.
+```java
+String concatenate(String s1, String s2) {...}
+String concatenate(String s1, String s2, String s3) {...}
+String concatenate(String s1, String s2, String s3, String s4) {...}
+
+=>
+String concatentage(String... str) {...}
+
+```
+**하지만 호출 시 마다 배열이 생성되므로 비효율 발생!**
