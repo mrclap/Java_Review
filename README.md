@@ -150,3 +150,6 @@ int[] number = new int[0];
 int[] number = new int[]{};
 int[] number = {};
 ```
+
+#### 2. String베열
+##### 
