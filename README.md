@@ -223,7 +223,7 @@ Method Area / Call stack / Heap 으로 구성
 - 인스턴트 변수 : 인스턴스 생성시 생성
 - 클래스 변수 : 인스턴스 생성여부와 관계없이 생성
 
-### 4. 오버로딩(overloading)
+#### 4. 오버로딩(overloading)
 ##### 4.5 가변인자(varargs)와 오버로딩
 
 가변인자를 이용해 연속되는 파라미터를 하나로 묶어 줄 수 있다.
@@ -278,7 +278,7 @@ static { ... }
 - 인스턴스 초기화 블럭
   - 생성자와 같이 인스턴스를 생성할 때 마다 수행(생성자보다 우선)
 ```java
-{ ... }
+{ ... } 
 ```
 
 
@@ -299,3 +299,125 @@ _ _ _
 #### 3. package와 import
 ##### 3.2 패키지 선언
 패키지명은 클래스와 구분하기 위해 '소문자'로 쓰는 것을 원칙으로 함
+
+##### java.lang
+java.lang의 클래스들은 패키지명 없이 사용이 가능하다.
+- String
+- StringBuffer
+- Process
+- Runtime
+- Thread
+- Math
+- StrictMath
+- Exception Throwable
+- Error
+- Package
+- Class
+- ClassLoader
+- Wrapper
+- System
+- Stream
+
+##### 3.5 static import
+import문을 사용하여 클래스의 패키지명을 생략하듯,
+static import문을 사용하여 static멤버 호출 시 클래스 이름을 생략할 수 있다.
+
+```java
+import static java.lang.Math.random;
+import static java.lang.System.out;
+
+System.out.println(Math.random()); -> out.println(random());
+```
+
+#### 4. 제어자(Modifier)
+##### 4.2 static: '클래스의', '공통적인'
+##### 4.3 final: '마지막의', '변경될 수 없는'
+더 이상 오버라이딩을 할 수 없다..... 사요나라.
+
+더 이상 다른 녀석이 상속을 받을 수도 없다. 마지막 세대
+
+**인스턴스 변수는 생성자에서 초기화 되도록 할 수 있다**
+```java
+
+class Card {
+    final int NUMBER;
+    final STring KIND;
+    static int width = 100;
+    static int height = 250;
+    
+    Card(String kind, int num) {
+        KIND = kind; // <- 여기서 final 인스턴스변수 초기화
+        NUMBER = num; // <- 여기서 final 인스턴스변수 초기화
+    }
+}
+```
+
+**카드 deck을 만들였다면 실제 실행시에 카드값을 바꾸는 로직이 아닌, 순서를 바꾸는 형태로 코딩해야 한다!!!!!!!!!!!**
+
+##### 4.4 abstract: '추상의', '미완성의'
+##### 4.5 접근 제어자
+실제 구현에서 적용해보자!!!
+
+> private: 같은 클래스 내에서만 접근
+
+> default: 같은 패키지 내에서만 접근
+
+> protected: 같은 패키지 내에서 + 다른 패키지의 자손클래스에서(상속에 의해)
+
+> public: 접근 제한 없음
+
+
+접근제어자를 통한 캡슐화(encapsulation)
+- 외부로부터의 접근 제한
+- 복잡성을 줄임: 클래스내에서만 사용되는 내부작업을 위한 변수나 메서드 등을 감춤
+```java
+public class Time {
+    public int hour;
+    public int minute;
+    public int second;
+}
+// 위 처럼 Time 클래스가 정의된 경우
+Time t = new Time();
+t.hour = 25; // 이러한 형태의 값 할당이 가능하지만 말도안된다!
+// 따라서 setter를 이용하며, setter에서 유효한 값인지 판단 후 할당해준다.
+public class Time {
+    private int hour;
+    private int minute;
+    private int second;
+    
+    public int getHour() { return hour; }
+    public void setHour(int hour) {
+        if(hour < 0 || hour > 23) return;
+        this.hour = hour;
+    }
+    public int getMinute() { return minute; }
+    public void setMinute(int minute) {
+        if (minute < 0 || minute > 59) return;
+        this.minute = minute;
+    }
+    public int getSecond() { return second; }
+    public void setSecond(int second) {
+        if (second < 0 || second > 59) return;
+        this.second = second;
+    }
+}
+```
+
+생성자를 private으로 선언하여 인스턴스 생성을 제한할 수 있다
+- singleton 패턴을 사용한다던가..
+
+클래스의 생성자가 private이라면 class는 final로 선언하는 것이 좋다
+- 자손클래스의 인스턴스 생성시 조상클래스의 생성자를 호출해야하지만 불가능하므로
+
+#### 5. 다형성(polymorphism)
+##### 5.1 다형성이란
+'여러 가지 형태를 가질 수 있는 능력'
+- 한 타입의 참조변수에 여러 타입의 객체를 담을 수 있다!!!
+
+##### 5.3 instanceof 연산자
+
+참조변수가 참조하고 있는 인스턴스의 실제 타입을 알아보기 위해 사용하는 연산자
+```java
+if (c instanceof FireEngine) { ... }
+```
+
