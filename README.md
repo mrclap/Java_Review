@@ -470,4 +470,67 @@ default
   - ***이거.. 인터페이스의 근간과 충돌하는 문제가 있지 않나??.. 특히 .. 내용없이 {}로 바로 닫아버린다면, 구현체에따라서 해당 메서드의 기능이 없는데.. 사용하려고 시도하는 등의 문제가...생기지않을까?***
 - 여러 인터페이스에서 동일한 이름의 default 메서드가 있는경우 구현체에서 오버라이딩해서 문제를 해결
 
+### Ch08. 예외처리(Exception handling)
+***Exception은 개발자의 실수를 위해 존재한다기보다는 사용상의 문제들을 managing하기 위한 것이라고 생각된다.
+물론 1차적으로 입력값을 체크한다던가 하는 처리는 해야겠지!***
 
+
+#### 1. 예외처리(exception handling)
+에러 vs 예외
+- 에러 : 메모리 부족, 스택오버플로우 등으로 일단 발생하면 복구할 수 없는 심각한 오류
+- 예외 : 발생하더라도 수습이 될 수 있는 비교적 덜 심긱한 것
+
+##### 1.2 예외 클래스의 계층 구조
+크게 RuntimeException과 이를 제외한 나머지 Exception으로 나누어짐
+- RuntimeException
+   - 프로그래머의 실수에 의해서 발생하는 예외
+   - 프로그래밍 요소와 관련이 깊다
+       - IndexOutOfBoundsException : 배열의 범위를 벗어남
+       - NullPointerException : 값이 null인 참조변수의 멤버를 호출하려 함
+       - ClassCastException : 클래스간 형변환을 잘못함
+       - ArithmaticException : 정수를 0으로 나누려고 시도함
+       
+- 그 외의 Exception
+    - 외부 영향에 의해 발생하는 예외
+       - FileNotFoundException : 존재하지 않는 파일의 이름 입력
+       - ClassNotFoundException : 실수로 클래스의 이름을 잘못 적음
+           - ***왜 클래스의 이름을 잘못적는 것이 외부 영향일까 ..?***
+       - DataFormatException : 데이터 형식이 잘못 됨
+
+##### 1.3 예외처리(try catch)
+예외를 처리하지 못하면, 프로그램은 비정상 종료되며,
+JVM의 '예외처리기(UncaughtExceptionHandler)'가 받아서 예외의 원인을 출력
+
+##### 1.5 예외의 발생과 catch블럭
+printStackTrace() / getMessage()
+
+printStackTrace()
+- 에외 발생 당시의 호출스택에 있던 메서드의 정보와 예외 메시지를 출력
+
+getMessage()
+- 예외 메시지 출력
+
+에러메시지
+- <code>Exception e = new Exception(**"에러메시지"**);</code>
+
+RuntimeException이 발생하는 코드를 가지고 있어도 컴파일은 문제없이 됨
+- 프로그래머의 실수에 의해 발생하는 것이므로 컴파일러가 예외처리를 강제하지 않음
+- 즉 컴파일 단계에서 예외처리를 체크하지 않음(unchecked예외)
+- 만일 RuntimeException클래스들에 속하는 예외가 발생할 가능성이있는 코드마다 예외처리를하면 코드가 매우 비효율적으로 변함..
+  - 배열을 화면에 뿌린다거나 하는 프로세스마다.. try catch를 잡아줘야함.
+
+##### 1.8 finally
+try블럭에 return이 있더라도
+finally실행 후 return 된다.
+
+##### 1.9 자원 자동 반환 (try-with-resource)
+
+```java
+try( 객체 생성 문장 ) { // 이때 생성되는 객체가 try블록 종료 후 close()를 호출하려면
+                     // AutoCloseable 인터페이스를 구현한 객체이어야 한다.
+    ...
+}
+```
+
+##### 1.11 에외 되던지기 (exception re-throwing)
+catch에서 예외 처리 후 다시 throw exception으로 호출한 메서드에 예외를 던짐
