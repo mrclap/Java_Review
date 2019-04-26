@@ -534,3 +534,34 @@ try( 객체 생성 문장 ) { // 이때 생성되는 객체가 try블록 종료 
 
 ##### 1.11 에외 되던지기 (exception re-throwing)
 catch에서 예외 처리 후 다시 throw exception으로 호출한 메서드에 예외를 던짐
+
+- - -
+### Ch09. java.lang
+#### 1. java.lang
+##### 1.1 object 클래스
+hashCode() 
+- 자바에서는 객체의 주소값을 이용하여 해시값을 만들기때문에 서로다른 두 객체는 같은 해시값을 가질 수 없음
+  - <code>System.identityHashCode(Object x)</code>
+```java
+// String클래스에 오버라이딩 된 hashCode메서드
+// 동일한 값을 가진 String객체라면 동일한 hash값을 가지도록 되어있다.
+public int hashCode() {
+    int h = hash;
+    if (h == 0 && value.length > 0) {
+        char val[] = value;
+
+        for (int i = 0; i < value.length; i++) {
+            h = 31 * h + val[i];
+        }
+        hash = h;
+    }
+    return h;
+}
+```
+
+
+> native 메서드
+- 자바에서 네이티브 응용프로그램/C/C++/어셈블리 등의 다른 언어로 작성된 라이브러리들을 호출
+
+공변 반환 타입(Convariant return type)
+-  자손 클래스에서 메서드의 리턴 타입을 자손 클래스 타입으로 변경할 수 있음(jdk 1.5~)
