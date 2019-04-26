@@ -565,3 +565,34 @@ public int hashCode() {
 
 공변 반환 타입(Convariant return type)
 -  자손 클래스에서 메서드의 리턴 타입을 자손 클래스 타입으로 변경할 수 있음(jdk 1.5~)
+
+##### 1.2 String 클래스
+
+```java
+// 컴파일러에 의해 str1과 str2는 동일한 String 인스턴스를 참조하게 된다.
+String str1 = "abc";     // str1 == str2
+String str2 = "abc";
+String str3 = new String("abc"); // str3 != str4
+String str4 = new String("abc");
+```
+
+##### 1.5 Wrapper 클래스
+
+Integer, Float, Long등은 기본형 int, float, long의 wapper클래스
+- \>, < 등의 연산자 대신 compareTo 사용,
+- Byte.parseByte, Integer.parseInt는 기본형을 반환하지만
+- Byte.valueOf, Integer.valueOf는 래퍼 클래스를 반환
+```java
+int i = Integer.paraseInt("100")   <---> int i = Integer.valueOf("100")
+long ln = Long.parseLong("100")    <---> long ln = Long.valueOf("100")
+```
+- 래퍼클래스가 기본형보다 조금 더 느림
+- 오토박싱으로 인해 기본형과 참조형(래퍼클래스)간에 연산이 가능
+- 기본형->래퍼클래스 : 오토박싱
+- 래퍼클래스->기본형 : 언박싱
+- ArrayList등에 기본형 int를 넣으면 오토박싱이 이루어짐
+
+#### 2.유용한 클래스
+#### 2.1 java.util.Objects
+- Object클래스의 보조 클래스, 모든 메서드가 static
+- 객체비교, 널체크 등에 유용함
