@@ -470,6 +470,7 @@ default
   - ***이거.. 인터페이스의 근간과 충돌하는 문제가 있지 않나??.. 특히 .. 내용없이 {}로 바로 닫아버린다면, 구현체에따라서 해당 메서드의 기능이 없는데.. 사용하려고 시도하는 등의 문제가...생기지않을까?***
 - 여러 인터페이스에서 동일한 이름의 default 메서드가 있는경우 구현체에서 오버라이딩해서 문제를 해결
 
+_ _ _
 ### Ch08. 예외처리(Exception handling)
 ***Exception은 개발자의 실수를 위해 존재한다기보다는 사용상의 문제들을 managing하기 위한 것이라고 생각된다.
 물론 1차적으로 입력값을 체크한다던가 하는 처리는 해야겠지!***
@@ -596,3 +597,41 @@ long ln = Long.parseLong("100")    <---> long ln = Long.valueOf("100")
 #### 2.1 java.util.Objects
 - Object클래스의 보조 클래스, 모든 메서드가 static
 - 객체비교, 널체크 등에 유용함
+
+
+- - -
+### Ch10.날짜와 시간 & 형식화
+#### 1. 날짜와 시간
+##### 1.1 Calendar와 Date
+
+Date<->Calendar
+> 1. Calendar -> Date
+```java
+Calendar cal = Calendar.getInstance();
+...
+Date d = new Date(cal.getTimeInMillis());
+```
+2. Date -> Calendar
+```java
+Date d = new Date();
+...
+Calendar cal = Calendar.getInstance();
+cal.setTime(d);
+```
+
+#### 3. java.time패키지
+##### 3.1 java.time 패키지의 핵심 클래스
+
+- - - 
+### Ch11. 컬렉션 프레임 워크(Collections Framework)
+<u>***전체적으로 자유롭게 collection을 사용할 수 있어야한다!!!***</u>
+
+
+#### 1. 컬렉션 프레임웍(Collections Framework)
+데이터 군을 저장하는 클래스들의 표준화 설계
+
+##### 1.9 TreeSet
+자바의 TreeSet은 '레드-블랙 트리'로 구현되어 짐
+
+[zedd0202님의 친절한 설명](https://zeddios.tistory.com/237)
+
