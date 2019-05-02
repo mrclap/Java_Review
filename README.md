@@ -635,3 +635,77 @@ cal.setTime(d);
 
 [zedd0202님의 친절한 설명](https://zeddios.tistory.com/237)
 
+##### 1.14 컬렉션 클래스 정리&요약
+p.668
+
+- - - 
+### Ch12. Generics, enumeration, annotation
+
+#### 1. Generics
+##### 1.1 Generics란?
+다양한 타입의 객체들을 다루는 메서드, 컬렉션 클래스의 컴파일시 타입체크
+- 컴파일 시에 객체의 타입을 체크하므로 타입 안정성이 높고 형변환의 번거로움이 줄어듦
+
+##### 1.2 지네릭 클래스 선언
+- 타입매개변수가 사용된 클래스는 타입 변수를 지정하지 않으면 경고가 발생
+- 컴파일 및 실행에는 문제가 없으나, 타입 변수를 알고있다는 의미에서
+- "Object"를 타입변수로 지정하면 경고가 발생하지 않음
+ 
+지네릭 클래스 생성 시, 지네릭 타입의 배열은 생성할 수 없다
+- new 연산자는 컴파일 시점에서 타입을 정확히 알아야 사용 가능
+- instanceof도 사용 불가
+- 대안 : newInstance() 혹은 Object배열 생성 후 복사, 형변환
+
+```java
+T[] tmpArr = new T[10]; //error
+
+```
+
+##### 1.4 제한된 지네릭 클래스
+- extends를 사용하여 타입 매개변수를 제한할 수 있다.
+- class는 물론, 인터페이스도 extends를 이용한다.
+- &를 이용하여 클래스와 인터페이스를 동시에 제한할 수 있다.
+
+
+##### 1.6 지네릭 메서드
+메서드 선언부의 지네릭 타입은 지네릭 클래스에 정의된 타입매개변수와 전혀 별개임
+```java
+
+class FruitBox<T> { /// 여기에서의 <T>와
+    ...  /// 아래의 <T>는 별개다
+    static <T> void sort(List<T> list, Comparator<? super T> c) {
+    ...
+    }
+}
+```
+
+```java
+
+/// 와일드 카드를 사용한 이 static메서드는
+static Juice makeJuice(FruitBox<? extends Fruit> box) {
+    ...
+}
+
+/// 이렇게 바뀔 수 있다
+/// 대신 호출시에 타입변수를 함께 호출해야 한다...
+/// 하지만 보통은 타입을 추청할 수 있으므로 생략할 수 있다.
+static <T extends Fruit> Juice makeJuice(FruitBox<T> box) {
+    ...
+}
+```
+
+#### 2. enums
+*** 반복적으로 봐주자!***
+
+#### 3. Annotations
+@SuppressWarnings
+- 컴파일러가 보여주는 경고 메시지를 나타나지 않게 함
+- deprecation, unchecked, rawtypes, varargs ...
+- @SuppressWarnings("unchecked")
+- @SuppressWarnings({"deprecation", "unchecked"})
+
+- - - 
+### Ch14. 람다와 스트림
+
+- - - 
+### Ch15. I/O
